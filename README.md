@@ -1,4 +1,4 @@
-# Snap Player Stats
+# Marvel Snap Player Stats
 ## What is it?
 ### A Python script that reads data from your game files and compiles into a nice webpage. Data shown includes account history, collection, ranked, conquest and card statistics.
 &nbsp;
