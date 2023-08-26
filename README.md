@@ -10,7 +10,7 @@
 &nbsp;
 ## How to use it?
 ### PC: To execute the script just download the project files to your PC and execute file "generate_file.py". This will create a file called stats.html in the same folder and open it automatically on a browser.
-### Android: Download the project files to your device and then use an app (tested on Pydroid3) that let's you execute a Python file. This will create a file called stats.html in the same folder that you need to open manually on a browser.
+### Android: Download the project files to your device and then use an app (tested on Pydroid3) that let's you execute a Python file and execute file "generate_file.py". This will create a file called stats.html in the same folder that you need to open manually on a browser.
 ### iPhone: Not available at this time. Currently working on making it possible.
 &nbsp;
 ## What does it look like?
