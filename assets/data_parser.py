@@ -9,8 +9,8 @@ rankedWins = 0
 rankedLosses = 0
 rankedTies = 0
 rankedWinPrct = 0.0
-standing = 0
-skillRating = 0
+standing = ''
+skillRating = ''
 rankedCurrentLevel = 0
 rankedMaxLevel = 0
 rankedCurrentLevelCubes = 0
@@ -100,10 +100,16 @@ def reload_file():
 			rankedTies = data['ServerState']['Account']['TiesInPlaytestEnvironment']
 
 		global standing
-		standing = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding']
+		if 'LeaderboardLog' not in data['ServerState']:
+			standing = 'N.A.'
+		else:
+			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding'])
 
 		global skillRating
-		skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardSkillRating']
+		if 'LeaderboardLog' not in data['ServerState']:
+			skillRating = 'N.A.'
+		else:
+			skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardSkillRating']
 
 		global rankedMaxLevel
 		rankedMaxLevel = data['ServerState']['RankLog']['HighWatermarkRankDetails']['Rank']
@@ -124,7 +130,10 @@ def reload_file():
 			rankedCurrentLevelCubes = data['ServerState']['RankLog']['CurrentRankDetails']['Trophies']
 
 		global rankedGamesPlayedThisSeason
-		rankedGamesPlayedThisSeason = data['ServerState']['RankLog']['GamesPlayedInSeason']
+		if 'GamesPlayedInSeason' not in data['ServerState']['RankLog']:
+			rankedGamesPlayedThisSeason = 0
+		else:
+			rankedGamesPlayedThisSeason = data['ServerState']['RankLog']['GamesPlayedInSeason']
 
 		global rankedCurrentWinStreak
 		allLeagueData = data['ServerState']['MatchHistory']['HistoryPerLeague']

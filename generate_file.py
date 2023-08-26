@@ -16,7 +16,7 @@ def addPlayerData(template_file):
     global content
     content = template_file.read()
     content = content.replace("{{ playerName }}", data_parser.get_PlayerName())
-    content = content.replace("{{ standing }}", "#" + str(data_parser.get_standing()))
+    content = content.replace("{{ standing }}", str(data_parser.get_standing()))
     content = content.replace("{{ skillRating }}", str(data_parser.get_skillRating()))
     content = content.replace("{{ timeStarted }}", str(data_parser.get_timeStarted()))
     content = content.replace("{{ rankedCurrentLevel }}", str(data_parser.get_rankedCurrentLevel()))
