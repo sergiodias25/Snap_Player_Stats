@@ -1,5 +1,6 @@
 import webbrowser
 import assets.data_parser as data_parser
+from datetime import datetime 
 
 content = ""
 screenWidthPrct = ''
@@ -54,13 +55,15 @@ if data_parser.isSystemWindows() or data_parser.isSystemLinux():
 if data_parser.isSystemMobile():
     screenWidthPrct = '95%'
 
+fileNameToCreate = "stats_" + datetime.now().strftime("%d-%B-%Y-%H%M%S") + ".html"
+
 with open("assets/template.html", encoding="utf-8-sig") as template_file:
-    with open("stats.html", "w") as generated_file:
+    with open(fileNameToCreate, "w", encoding="utf-8") as generated_file:
         addPlayerData(template_file)
         
         generated_file.write(content)
         
         if data_parser.isSystemWindows() or data_parser.isSystemLinux():
-           webbrowser.open_new_tab("stats.html")
+           webbrowser.open_new_tab(fileNameToCreate)
         if data_parser.isSystemMobile():
             print("File stats.html generated in the project folder. Open it manually in your browser!")
