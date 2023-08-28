@@ -14,4 +14,4 @@
 ### iPhone: Not available at this time. Currently working on making it possible.
 &nbsp;
 ## What does it look like?
-![alt text](https://github.com/sergiodias25/Snap_Player_Stats/blob/main/assets/example.png?raw=true)
+![alt text](https://github.com/sergiodias25/Snap_Player_Stats/blob/main/assets/example.png?raw=true?)
