@@ -1,6 +1,7 @@
 # Marvel Snap Player Stats
 ## What is it?
-### A Python script that reads data from your game files and compiles it into a nice webpage. Data shown includes account history, collection, ranked, conquest and card statistics.
+### A Python script that reads data from the game files stored in your device and compiles it into a nice webpage. 
+### Data shown includes account history, collection, ranked, conquest and card statistics.
 &nbsp;
 ## How does it work?
 ### This script only reads data from the game files stored in your device. These files are visible to anyone and all the data is easily accessible with a simple file explorer tool.
