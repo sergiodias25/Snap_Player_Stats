@@ -1,16 +1,8 @@
 import webbrowser
 import assets.data_parser as data_parser
-import platform
 
 content = ""
 screenWidthPrct = ''
-
-
-if platform.system() == 'Windows':
-    screenWidthPrct = '70%'
-if platform.system() == 'Linux':
-    screenWidthPrct = '95%'
-     
 
 def addPlayerData(template_file):
     global content
@@ -57,12 +49,18 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
     content = content.replace("{{ screenWidthPrct }}", screenWidthPrct)
 
+if data_parser.isSystemWindows() or data_parser.isSystemLinux():
+    screenWidthPrct = '70%'
+if data_parser.isSystemMobile():
+    screenWidthPrct = '95%'
+
 with open("assets/template.html", encoding="utf-8-sig") as template_file:
     with open("stats.html", "w") as generated_file:
         addPlayerData(template_file)
         
         generated_file.write(content)
-        if platform.system() == 'Windows':
-            webbrowser.open_new_tab("stats.html")
-        if platform.system() == 'Linux':
+        
+        if data_parser.isSystemWindows() or data_parser.isSystemLinux():
+           webbrowser.open_new_tab("stats.html")
+        if data_parser.isSystemMobile():
             print("File stats.html generated in the project folder. Open it manually in your browser!")

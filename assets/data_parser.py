@@ -2,6 +2,20 @@ import json
 import os
 import datetime
 import platform
+from os import environ
+
+is_android = 'ANDROID_STORAGE' in environ
+
+def isSystemWindows():
+    return platform.system() == 'Windows'
+
+def isSystemLinux():
+    platform.system() == 'Linux'
+
+def isSystemMobile():
+    if platform.system() == 'Linux' and is_android:
+        return True
+    return False
 
 snapId = ''
 playerName = ''
@@ -45,18 +59,24 @@ collectionLvl = 0
 cardUnlockHistory = {}
 
 profileFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
-if platform.system() == 'Linux':
-	profileFilePath = '/storage/emulated/0/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ProfileState.json'
+if isSystemMobile():
+	profileFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ProfileState.json'
+if isSystemLinux():
+	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
 profilePath = os.path.expanduser(profileFilePath)
 
 shopFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
-if platform.system() == 'Linux':
-	shopFilePath = '/storage/emulated/0/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ShopState.json'
+if isSystemMobile():
+	shopFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ShopState.json'
+if isSystemLinux():
+	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
 shopPath = os.path.expanduser(shopFilePath)
 
 collectionFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
-if platform.system() == 'Linux':
-	collectionFilePath = '/storage/emulated/0/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/CollectionState.json'
+if isSystemMobile():
+	collectionFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/CollectionState.json'
+if isSystemLinux():
+	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
 collectionPath = os.path.expanduser(collectionFilePath)
 
 def reload_file():
