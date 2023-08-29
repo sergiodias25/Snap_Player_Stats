@@ -10,7 +10,7 @@ def isSystemWindows():
     return platform.system() == 'Windows'
 
 def isSystemLinux():
-    platform.system() == 'Linux'
+    return platform.system() == 'Linux'
 
 def isSystemMobile():
     if platform.system() == 'Linux' and is_android:
@@ -62,21 +62,21 @@ profileFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvpro
 if isSystemMobile():
 	profileFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ProfileState.json'
 if isSystemLinux():
-	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
+	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
 profilePath = os.path.expanduser(profileFilePath)
 
 shopFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
 if isSystemMobile():
 	shopFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ShopState.json'
 if isSystemLinux():
-	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
+	shopFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
 shopPath = os.path.expanduser(shopFilePath)
 
 collectionFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
 if isSystemMobile():
 	collectionFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/CollectionState.json'
 if isSystemLinux():
-	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
+	collectionFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
 collectionPath = os.path.expanduser(collectionFilePath)
 
 def reload_file():
