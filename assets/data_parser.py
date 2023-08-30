@@ -90,7 +90,10 @@ def reload_file():
 		totalCreditsSpent = data['ServerState']['Account']['TotalCreditsSpent']
 
 		global totalCollectorsTokensSpent
-		totalCollectorsTokensSpent = data['ServerState']['Account']['TotalCollectorsTokensSpent']
+		if 'TotalCollectorsTokensSpent' not in data['ServerState']['Account']:
+			totalCollectorsTokensSpent = 0
+		else:
+			totalCollectorsTokensSpent = data['ServerState']['Account']['TotalCollectorsTokensSpent']
 
 		global battlePassesBought
 		if 'BattlePassPremiumBasic' not in data['ServerState']['Account']['ProductPurchaseCount']:
