@@ -123,16 +123,16 @@ def reload_file():
 			rankedTies = data['ServerState']['Account']['TiesInPlaytestEnvironment']
 
 		global standing
-		if 'LeaderboardLog' not in data['ServerState']:
+		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog'] or 'InfiniteLeaderboardStanding' not in data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']:
 			standing = 'N.A.'
 		else:
-			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding'])
+			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']['InfiniteLeaderboardStanding'])
 
 		global skillRating
-		if 'LeaderboardLog' not in data['ServerState']:
+		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog'] or 'InfiniteLeaderboardSkillRating' not in data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']:
 			skillRating = 'N.A.'
 		else:
-			skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardSkillRating']
+			skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']['InfiniteLeaderboardSkillRating']
 
 		global rankedMaxLevel
 		rankedMaxLevel = data['ServerState']['RankLog']['HighWatermarkRankDetails']['Rank']
