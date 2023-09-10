@@ -123,16 +123,16 @@ def reload_file():
 			rankedTies = data['ServerState']['Account']['TiesInPlaytestEnvironment']
 
 		global standing
-		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog'] or 'InfiniteLeaderboardStanding' not in data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']:
+		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog']:
 			standing = 'N.A.'
 		else:
-			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']['InfiniteLeaderboardStanding'])
+			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding'])
 
 		global skillRating
-		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog'] or 'InfiniteLeaderboardSkillRating' not in data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']:
+		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardSkillRating' not in data['ServerState']['LeaderboardLog']:
 			skillRating = 'N.A.'
 		else:
-			skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']['InfiniteLeaderboardSkillRating']
+			skillRating = data['ServerState']['LeaderboardLog']['InfiniteLeaderboardSkillRating']
 
 		global rankedMaxLevel
 		rankedMaxLevel = data['ServerState']['RankLog']['HighWatermarkRankDetails']['Rank']
