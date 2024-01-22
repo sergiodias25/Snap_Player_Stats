@@ -159,7 +159,8 @@ def reload_file():
 			rankedGamesPlayedThisSeason = data['ServerState']['RankLog']['GamesPlayedInSeason']
 
 		global rankedCurrentWinStreak
-		allLeagueData = data['ServerState']['MatchHistory']['HistoryPerLeague']
+		if 'HistoryPerLeague' in data['ServerState']['MatchHistory']: 
+			allLeagueData = data['ServerState']['MatchHistory']['HistoryPerLeague']
 
 		global conquestPGPlayed
 		global conquestPGStreak
@@ -169,6 +170,7 @@ def reload_file():
 		global conquestGoldStreak
 		global conquestInfinityPlayed
 		global conquestInfinityStreak
+		rankedData = None
 
 		for item in allLeagueData:
 			if item['LeagueDefId'] == 'Ranked':
@@ -185,7 +187,9 @@ def reload_file():
 			if item['LeagueDefId'] == 'ConquestInfinity':
 				conquestInfinityPlayed = item["NumberOfGamesPlayed"]
 				conquestInfinityStreak = winstreakAddPlusSign(item["WinningStreak"])
-		rankedCurrentWinStreak = rankedData['WinningStreak']
+		
+		if allLeagueData != None and rankedData != None and 'WinningStreak' in rankedData:
+			rankedCurrentWinStreak = rankedData['WinningStreak']
 
 		global timeUpdated
 		timeUpdated = data['ServerState']['Account']['TimeUpdated']
