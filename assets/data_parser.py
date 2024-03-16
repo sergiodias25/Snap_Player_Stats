@@ -83,18 +83,6 @@ def reload_file():
 	with open(shopPath, encoding="utf-8-sig") as shop_json_file:
 		data = json.load(shop_json_file)
 
-		global totalGoldSpent
-		totalGoldSpent = data['ServerState']['Account']['TotalGoldSpent']
-
-		global totalCreditsSpent
-		totalCreditsSpent = data['ServerState']['Account']['TotalCreditsSpent']
-
-		global totalCollectorsTokensSpent
-		if 'TotalCollectorsTokensSpent' not in data['ServerState']['Account']:
-			totalCollectorsTokensSpent = 0
-		else:
-			totalCollectorsTokensSpent = data['ServerState']['Account']['TotalCollectorsTokensSpent']
-
 		global battlePassesBought
 		if 'BattlePassPremiumBasic' not in data['ServerState']['Account']['ProductPurchaseCount']:
 			battlePassesBought = 0
@@ -208,6 +196,15 @@ def reload_file():
 
 		global snaps
 		snaps = data['ServerState']['Account']['Snaps']
+
+		global totalGoldSpent
+		totalGoldSpent = data['ServerState']['Wallet']['_goldCurrency']['SpentAmount']
+
+		global totalCreditsSpent
+		totalCreditsSpent = data['ServerState']['Wallet']['_creditsCurrency']['SpentAmount']
+
+		global totalCollectorsTokensSpent
+		totalCollectorsTokensSpent = data['ServerState']['Wallet']['_collectorsTokensCurrency']['SpentAmount']
 
 	with open(collectionPath, encoding="utf-8-sig") as collection_json_file:
 		data = json.load(collection_json_file)
