@@ -297,6 +297,7 @@ def winstreakAddPlusSign(value):
 def get_BestCardStats():
 	json_dict = json.loads(str(cardData).replace("'", "\""))
 	listedCards = ''
+	json_dict.pop('$type')
 	sorted_dict = dict(sorted(json_dict.items(), key=lambda item: item[1], reverse=True))
 	for key, value in sorted_dict.items():
 		if value > -1:
@@ -308,6 +309,7 @@ def get_BestCardStats():
 def get_WorstCardStats():
 	json_dict = json.loads(str(cardData).replace("'", "\""))
 	listedCards = ''
+	json_dict.pop('$type')
 	sorted_dict = dict(sorted(json_dict.items(), key=lambda item: item[1]))
 	for key, value in sorted_dict.items():
 		if value < 0:
@@ -384,6 +386,7 @@ def get_Variants():
 
 def get_CardUnlockHistory():
 	json_dict = json.loads(str(cardUnlockHistory).replace("'", "\"").replace("True", "\"True\""))
+	json_dict.pop('$type')
 	sorted_dict = dict(sorted(json_dict.items(), key=lambda item: int(item[0])))
 	result = ''
 
