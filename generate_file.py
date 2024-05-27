@@ -64,6 +64,6 @@ with open("assets/template.html", encoding="utf-8-sig") as template_file:
         generated_file.write(content)
         
         if data_parser.isSystemWindows() or data_parser.isSystemLinux():
-           webbrowser.open_new_tab(fileNameToCreate)
+            webbrowser.open_new_tab(fileNameToCreate)
         if data_parser.isSystemMobile():
             print("File stats.html generated in the project folder. Open it manually in your browser!")

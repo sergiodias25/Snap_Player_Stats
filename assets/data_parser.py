@@ -111,7 +111,7 @@ def reload_file():
 			rankedTies = data['ServerState']['Account']['TiesInPlaytestEnvironment']
 
 		global standing
-		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog']:
+		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardStanding' not in data['ServerState']['LeaderboardLog']:
 			standing = 'N.A.'
 		else:
 			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding'])
