@@ -46,7 +46,6 @@ Defaults:
 # ---- CLI Argument Parsing ----
 
 args = sys.argv[1:]
-print("\n".join(args))
 
 def getArgs():
     return args
