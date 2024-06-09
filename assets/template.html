@@ -1,506 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Snap Player Stats v0.2</title>
-    <script>
-      function openTab(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
 
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snap Player Stats v0.2</title>
+  <script>
+    function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
 
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-      }
-    </script>
-    <style>
-      .center {
-        margin: auto;
-        width: {{ screenWidthPrct }};
-        text-align: center;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
       }
 
-      .tablinks {
-        width: 20%;
-        text-align: center;
-        font-size: 1.1vw;
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
 
-      .body {
-        background-color: dimgray;
-        background-image: url("assets/background.jpg");
-        font-size: 1.2vw;
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+  <style>
+    .center {
+      margin: auto;
+      width: {{ screenWidthPrct }};
+      text-align: center;
+    }
+
+    .tablinks {
+      width: 20%;
+      text-align: center;
+      font-size: 1.1vw;
+    }
+
+    .body {
+      background-color: dimgray;
+      background-image: url("assets/background.jpg");
+      font-size: 1.2vw;
+    }
+
+    .tab {
+      overflow: hidden;
+      border: 1px solid rgb(79, 3, 109);
+      border-bottom: none;
+      background-color: #f1f1f1;
+    }
+
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: 1px solid rgb(87, 50, 104);
+      outline: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    .tabcontent {
+      display: none;
+      padding: 0.3%;
+      background-color: #f1f1f1;
+      border: 1px solid rgb(79, 3, 109);
+      border-top: none;
+      animation: fadeEffect 0.8s;
+    }
+
+    @keyframes fadeEffect {
+      from {
+        opacity: 0;
       }
 
-      /* Style the tab */
-      .tab {
-        overflow: hidden;
-        border: 1px solid rgb(79, 3, 109);
-        border-bottom: none;
-        background-color: #f1f1f1;
+      to {
+        opacity: 1;
       }
+    }
 
-      /* Style the buttons that are used to open the tab content */
-      .tab button {
-        background-color: inherit;
-        float: left;
-        border: 1px solid rgb(87, 50, 104);
-        outline: none;
-        cursor: pointer;
-        transition: 0.3s;
-      }
+    .column {
+      outline: 1px solid black;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: top;
+      flex-direction: column;
+      text-align: center;
+    }
 
-      /* Change background color of buttons on hover */
-      .tab button:hover {
-        background-color: #ddd;
-      }
+    .column-cards {
+      outline: 1px solid black;
+      text-align: center;
+      display: flex;
+      flex: 1;
+      height: 100%;
+      align-items: top;
+      white-space: pre-wrap;
+    }
 
-      /* Create an active/current tablink class */
-      .tab button.active {
-        background-color: #ccc;
-      }
+    .cards-align {
+      width: 50%;
+    }
 
-      /* Style the tab content */
-      .tabcontent {
-        display: none;
-        padding: 0.3%;
-        background-color: #f1f1f1;
-        border: 1px solid rgb(79, 3, 109);
-        border-top: none;
-      }
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
 
-      .tabcontent {
-        animation: fadeEffect 0.8s; /* Fading effect takes 1 second */
-      }
+    h1 {
+      color: hsl(263, 97%, 26%);
+    }
 
-      /* Go from zero to full opacity */
-      @keyframes fadeEffect {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
+    h2 {
+      color: hsl(263, 97%, 26%);
+    }
 
-      .column {
-        outline: 1px solid black;
-        display: flex;
-        flex: 1;
-        align-items: center;
-        justify-content: top;
-        flex-direction: column;
-        text-align: center;
-      }
+    h3 {
+      color: hsl(263, 97%, 26%);
+    }
 
-      .column-cards {
-        outline: 1px solid black;
-        text-align: center;
-        display: flex;
-        flex: 1;
-        height: 100%;
-        align-items: top;
-        white-space: pre-wrap;
-      }
+    .row1 {
+      background-color: #ddd;
+    }
 
-      .cards-align {
-        width: 50%;
-      }
+    .row2 {
+      background-color: #eee;
+    }
 
-      .row {
-        display: flex;
-        flex-direction: row;
-      }
+    .footer {
+      position: sticky;
+      top: 100%;
+      align-self: center;
+      width: 60%;
+      background-color: #f1f1f1;
+      border: 1px solid rgb(79, 3, 109);
+      text-align: center;
+      margin: auto;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
 
-      h1 {
-        color: hsl(263, 97%, 26%);
-      }
-      
-      h2 {
-        color: hsl(263, 97%, 26%);
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
 
-      h3 {
-        color: hsl(263, 97%, 26%);
-      }
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
 
-      .row1 {
-        background-color: #ddd;
-      }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
 
-      .row2 {
-        background-color: #eee;
-      }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
 
-      .footer {
-        position: sticky;
-        top: 100%;
-        align-self: center;
-        width: 60%;
-        background-color: #f1f1f1;
-        border: 1px solid rgb(79, 3, 109);
-        text-align: center;
-        margin: auto;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 10px;
-      }
-    </style>
-  </head>
-  <body class="body">
-    <div class="center" style="padding-top: 2%;">
-      <div class="tab">
-        <div style="overflow: hidden;">
-          <button class="tablinks center" style="border-left: none;"  onclick="openTab(event, 'Player_Data')"
-          id="defaultOpen">
-            <h1 center>Account</h1>
-          </button>
-          <button
-            class="tablinks center"
-            onclick="openTab(event, 'Collection')"
-          >
-            <h1 center>Collection</h1>
-          </button>
-          <button class="tablinks center" onclick="openTab(event, 'Ranked')">
-            <h1 center>   Ranked   </h1>
-          </button>
-          <button class="tablinks center" onclick="openTab(event, 'Card_Stats')">
-            <h1 center>Card Stats</h1>
-          </button>
-          <button class="tablinks center" style="border-right: none;" onclick="openTab(event, 'Conquest')">
-            <h1 center>  Conquest  </h1>
-          </button>
+    .variants-container {
+      display: flex;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .variant-column {
+      flex: 1;
+      min-width: 150px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body class="body">
+  <div class="center" style="padding-top: 2%;">
+    <div class="tab">
+      <div style="overflow: hidden;">
+        <button class="tablinks center" style="border-left: none;" onclick="openTab(event, 'Player_Data')" id="defaultOpen">
+          <h1 center>Account</h1>
+        </button>
+        <button class="tablinks center" onclick="openTab(event, 'Collection')">
+          <h1 center>Collection</h1>
+        </button>
+        <button class="tablinks center" onclick="openTab(event, 'Ranked')">
+          <h1 center> Ranked </h1>
+        </button>
+        <button class="tablinks center" onclick="openTab(event, 'Card_Stats')">
+          <h1 center>Card Stats</h1>
+        </button>
+        <button class="tablinks center" style="border-right: none;" onclick="openTab(event, 'Conquest')">
+          <h1 center> Conquest </h1>
+        </button>
+      </div>
+      <div>
+        <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%;">Last Update:{{ timeUpdated }}</h3>
+      </div>
+    </div>
+
+    <div id="Player_Data" class="tabcontent">
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Player Name</h1>
         </div>
-        <div>
-          <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%;">Last Update:{{ timeUpdated }}</h3>
+        <div class="column">
+          <h1 center>{{ playerName }}</h1>
         </div>
       </div>
 
-      <div id="Player_Data" class="tabcontent">
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Player Name</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ playerName }}</h1>
-          </div>
-        </div>
-
-        <div class="row row2">
-          <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
+      <div class="row row2">
+        <div class="column">
+          <h1 onmouseover="" style="cursor: help;" center title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
 Not sure if skill rating is taken into account.
 This is only updated when the game is opened (need to exit and launch game again for an update).">Infinite Ranking</h1>
-          </div>
-          <div onmouseover="" style="cursor: help;" class="column">
-            <h1
-              center
-              title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
-Not sure if skill rating is taken into account.
-This is only updated when the game is opened (need to exit and launch game again for an update)"
-            >
-              {{ standing }}
-            </h1>
-          </div>
         </div>
+        <div onmouseover="" style="cursor: help;" class="column">
+          <h1 center title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked.
+Not sure if skill rating is taken into account.
+This is only updated when the game is opened (need to exit and launch game again for an update)">
+            {{ standing }}
+          </h1>
+        </div>
+      </div>
 
-        <div class="row row1">
-          <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated. 
+      <div class="row row1">
+        <div class="column">
+          <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated. 
 Is somehow related to cubes won/lost in ranked only.
 This is only updated when the game is opened (need to exit and launch game again for an update)
 Only available for players that have reached Infinite.">Snap Points</h1>
-          </div>
-          <div class="column">
-            <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated.
+        </div>
+        <div class="column">
+          <h1 onmouseover="" style="cursor: help;" center title="No data on how this is calculated.
 Is somehow related to cubes won/lost in ranked only.
 This is only updated when the game is opened (need to exit and launch game again for an update)
 Only available for players that have reached Infinite.">
-              {{ skillRating }}
-            </h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Credits Spent</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ totalCreditsSpent }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Gold Spent</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ totalGoldSpent }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Tokens Spent</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ totalCollectorsTokensSpent }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Battle Passes Bought</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ battlePassesBought }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Started Playing</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ timeStarted }}</h1>
-          </div>
+            {{ skillRating }}
+          </h1>
         </div>
       </div>
-
-      <div id="Ranked" class="tabcontent">
-        <div class="row row1">
-          <div class="column">
-            <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Current Season</h1>
-          </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Credits Spent</h1>
         </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center title="Current Season Data Only">Current Level</h1>
-          </div>
-          <div class="column">
-            <h1 center>
-              {{ rankedCurrentLevel }} ({{ rankedCurrentLevelCubes }})
-            </h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center title="Current Season Data Only">Highest Level</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ rankedMaxLevel }} ({{ rankedMaxLevelCubes }})</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center title="Current Season Data Only">Current Win Streak</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ rankedCurrentWinStreak }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center title="Current Season Data Only">Games Played</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ rankedGamesPlayedThisSeason }}</h1>
-          </div>
-        </div>
-          <div class="row row2">
-            <div class="column">
-              <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Lifetime Stats</h1>
-            </div>
-          </div>
-          <div class="row row1">
-          <div class="column">
-            <h1 center>
-              {{ rankedWins }} Wins<br />{{ rankedLosses }} Losses<br />
-              {{ rankedTies }} Ties<br />
-              ({{ rankedWinPrct }}% Win Rate)<br />{{ snaps }} Snaps<br />
-              {{ concedes }} Conceded<br />{{ opponentConcedes }} Opponent
-              Conceded
-            </h1>
-          </div>
+        <div class="column">
+          <h1 center>{{ totalCreditsSpent }}</h1>
         </div>
       </div>
-
-      <div id="Conquest" class="tabcontent">
-        <div class="row row1">
-          <div class="column">
-            <h1 center></h1>
-          </div>
-          <div class="column">
-            <h1 center>Games Played</h1>
-          </div>
-          <div class="column">
-            <h1 center>Current Winning Streak</h1>
-          </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Gold Spent</h1>
         </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Proving Grounds</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestPGPlayed }}</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestPGStreak }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Silver</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestSilverPlayed }}</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestSilverStreak }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Gold</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestGoldPlayed }}</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestGoldStreak }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Infinity</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestInfinityPlayed }}</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ conquestInfinityStreak }}</h1>
-          </div>
+        <div class="column">
+          <h1 center>{{ totalGoldSpent }}</h1>
         </div>
       </div>
-
-      <div id="Card_Stats" class="tabcontent">
-        <div class="row row1">
-          <div class="column">
-            <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Card Win/Loss Ratio</h1>
-            <h2 style="margin: 0.03%; margin-bottom: 0.1%; padding-bottom: 0.5%;" center>
-              (when card is drawn/created in hand or played. Ranked data only.)
-            </h2>
-          </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Tokens Spent</h1>
         </div>
-        <div class="row row2">
-          <div class="cards-align">
-            <div class="column-cards">
-              <h1 style="width: 100%">{{ cardStatsBest }}</h1>
-            </div>
-          </div>
-          <div class="cards-align">
-            <div class="column-cards">
-              <h1 style="width: 100%">{{ cardStatsWorst }}</h1>
-            </div>
-          </div>
+        <div class="column">
+          <h1 center>{{ totalCollectorsTokensSpent }}</h1>
         </div>
       </div>
-
-      <div id="Collection" class="tabcontent">
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Collection Level</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ collectionLvl }}</h1>
-          </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Battle Passes Bought</h1>
         </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Cards</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ cardsOwned }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Splits</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ cardSplits }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Variants</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ variants }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Card Backs</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ cardBacksOwned }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center>Avatars</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ avatarsOwned }}</h1>
-          </div>
-        </div>
-        <div class="row row1">
-          <div class="column">
-            <h1 center>Titles</h1>
-          </div>
-          <div class="column">
-            <h1 center>{{ titlesOwned }}</h1>
-          </div>
-        </div>
-        <div class="row row2">
-          <div class="column">
-            <h1 center centered-element>
-              Card/Variant Unlock History
-            </h1>
-          </div>
-          <div class="column-cards">
-              <h1 style="width: 100%;">{{ cardUnlockHistory }}</h1>
-          </div>
+        <div class="column">
+          <h1 center>{{ battlePassesBought }}</h1>
         </div>
       </div>
-      <script>
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-      </script>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Started Playing</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ timeStarted }}</h1>
+        </div>
+      </div>
     </div>
-    <div style="padding-bottom: 2%;"></div>
-    <footer class="footer">
-      <h1 style="font-size: larger;">Data is collected only by reading the unencrypted files stored in your hard drive.<br />
-I made this data compiler because I love the game and also love statistics and data interpretation.<br/>
-To report any feedback or contact me please use the Reddit thread where I published this.<br/>
-I ocasionally stream on twitch <a href="http:\\twitch.com\obake25">here</a>.<br/><br/>
-I am currently unemployed and if you would be so kind, I would much appreciate any donation to help support me.<br /></h1>
-      <form action="https://www.paypal.com/donate" method="post" target="_top">
-        <input type="hidden" name="business" value="ZU8D84PDDDJCG" />
-        <input type="hidden" name="no_recurring" value="1" />
-        <input type="hidden" name="currency_code" value="EUR" />
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" width="15%" height="15%"/>
-        <img alt="" border="0" src="https://www.paypal.com/en_PT/i/scr/pixel.gif" width="1" height="1" />
-        </form>
-    </footer>
-  </body>
+
+    <div id="Ranked" class="tabcontent">
+      <div class="row row1">
+        <div class="column">
+          <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Current Season</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center title="Current Season Data Only">Current Level</h1>
+        </div>
+        <div class="column">
+          <h1 center>
+            {{ rankedCurrentLevel }} ({{ rankedCurrentLevelCubes }})
+          </h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center title="Current Season Data Only">Highest Level</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ rankedMaxLevel }} ({{ rankedMaxLevelCubes }})</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center title="Current Season Data Only">Current Win Streak</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ rankedCurrentWinStreak }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center title="Current Season Data Only">Games Played</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ rankedGamesPlayedThisSeason }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Lifetime Stats</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>
+            {{ rankedWins }} Wins<br />{{ rankedLosses }} Losses<br />
+            {{ rankedTies }} Ties<br />
+            ({{ rankedWinPrct }}% Win Rate)<br />{{ snaps }} Snaps<br />
+            {{ concedes }} Conceded<br />{{ opponentConcedes }} Opponent
+            Conceded
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div id="Conquest" class="tabcontent">
+      <div class="row row1">
+        <div class="column">
+          <h1 center></h1>
+        </div>
+        <div class="column">
+          <h1 center>Games Played</h1>
+        </div>
+        <div class="column">
+          <h1 center>Current Winning Streak</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Proving Grounds</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestPGPlayed }}</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestPGStreak }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Silver</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestSilverPlayed }}</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestSilverStreak }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Gold</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestGoldPlayed }}</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestGoldStreak }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Infinity</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestInfinityPlayed }}</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ conquestInfinityStreak }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div id="Card_Stats" class="tabcontent">
+      <div class="row row1">
+        <div class="column">
+          <h1 style="margin: 0.03%; margin-top: 0.1%;" center>Card Win/Loss Ratio</h1>
+          <h2 style="margin: 0.03%; margin-bottom: 0.1%; padding-bottom: 0.5%;" center>
+            (when card is drawn/created in hand or played. Ranked data only.)
+          </h2>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="cards-align">
+          <div class="column-cards">
+            <h1 style="width: 100%">{{ cardStatsBest }}</h1>
+          </div>
+        </div>
+        <div class="cards-align">
+          <div class="column-cards">
+            <h1 style="width: 100%">{{ cardStatsWorst }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Collection" class="tabcontent">
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Collection Level</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ collectionLvl }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Cards</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ cardsOwned }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Splits</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ cardSplits }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Variants</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ variants }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Card Backs</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ cardBacksOwned }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center>Avatars</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ avatarsOwned }}</h1>
+        </div>
+      </div>
+      <div class="row row1">
+        <div class="column">
+          <h1 center>Titles</h1>
+        </div>
+        <div class="column">
+          <h1 center>{{ titlesOwned }}</h1>
+        </div>
+      </div>
+      <div class="row row2">
+        <div class="column">
+          <h1 center centered-element>
+            Card/Variant Unlock History
+          </h1>
+        </div>
+        <div class="column-cards">
+          <div class="variants-container">
+            {{ cardUnlockHistory }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click();
+    </script>
+  </div>
+  <div style="padding-bottom: 2%;"></div>
+  
+</body>
+
 </html>

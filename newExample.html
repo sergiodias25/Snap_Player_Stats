@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snap Player Stats v0.2</title>
+    <script>
+      function openTab(evt, cityName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+    <style>
+      .center {
+        margin: auto;
+        width: 70%;
+        text-align: center;
+      }
+
+      .tablinks {
+        width: 20%;
+        text-align: center;
+        font-size: 1.1vw;
+      }
+
+      body {
+        background-color: dimgray;
+        background-image: url("assets/background.jpg");
+        font-size: 1.2vw;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .tab {
+        overflow: hidden;
+        border: 1px solid rgb(79, 3, 109);
+        border-bottom: none;
+        background-color: #f1f1f1;
+      }
+
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: 1px solid rgb(87, 50, 104);
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      .tab button.active {
+        background-color: #ccc;
+      }
+
+      .tabcontent {
+        display: none;
+        padding: 0.3%;
+        background-color: #f1f1f1;
+        border: 1px solid rgb(79, 3, 109);
+        border-top: none;
+        animation: fadeEffect 0.8s;
+      }
+
+      @keyframes fadeEffect {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .column {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        min-width: 150px;
+        box-sizing: border-box;
+      }
+
+      h1, h2, h3 {
+        color: hsl(263, 97%, 26%);
+      }
+
+      .footer {
+        position: sticky;
+        top: 100%;
+        width: 60%;
+        background-color: #f1f1f1;
+        border: 1px solid rgb(79, 3, 109);
+        text-align: center;
+        margin: auto;
+        padding: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .variants-container {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+      }
+
+      .variant-column {
+        flex: 1;
+        min-width: 150px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center" style="padding-top: 2%;">
+      <div class="tab">
+        <div style="overflow: hidden;">
+          <button class="tablinks center" style="border-left: none;" onclick="openTab(event, 'Player_Data')" id="defaultOpen">
+            <h1>Account</h1>
+          </button>
+          <button class="tablinks center" onclick="openTab(event, 'Collection')">
+            <h1>Collection</h1>
+          </button>
+          <button class="tablinks center" onclick="openTab(event, 'Ranked')">
+            <h1>Ranked</h1>
+          </button>
+          <button class="tablinks center" onclick="openTab(event, 'Card_Stats')">
+            <h1>Card Stats</h1>
+          </button>
+          <button class="tablinks center" style="border-right: none;" onclick="openTab(event, 'Conquest')">
+            <h1>Conquest</h1>
+          </button>
+        </div>
+        <div>
+          <h3 class="center" style="margin-top: 0.6%; margin-bottom: 0.6%;">Last Update: June 09 10:12 AM</h3>
+        </div>
+      </div>
+
+      <div id="Player_Data" class="tabcontent">
+        <table>
+          <tr>
+            <th>Player Name</th>
+            <td>anakin spiderwalker</td>
+          </tr>
+          <tr>
+            <th title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked. Not sure if skill rating is taken into account. This is only updated when the game is opened (need to exit and launch game again for an update).">Infinite Ranking</th>
+            <td title="Seems to be a leaderboard ranking players by who has the most level/cubes in Ranked. Not sure if skill rating is taken into account. This is only updated when the game is opened (need to exit and launch game again for an update)">{'$type': 'CubeProfile.LeaderboardDetails, SecondDinner.CubeProfile', 'SkillRating': 4656}</td>
+          </tr>
+          <tr>
+            <th title="No data on how this is calculated. Is somehow related to cubes won/lost in ranked only. This is only updated when the game is opened (need to exit and launch game again for an update) Only available for players that have reached Infinite.">Snap Points</th>
+            <td title="No data on how this is calculated. Is somehow related to cubes won/lost in ranked only. This is only updated when the game is opened (need to exit and launch game again for an update) Only available for players that have reached Infinite.">4656</td>
+          </tr>
+          <tr>
+            <th>Credits Spent</th>
+            <td>630615</td>
+          </tr>
+          <tr>
+            <th>Gold Spent</th>
+            <td>68960</td>
+          </tr>
+          <tr>
+            <th>Tokens Spent</th>
+            <td>58000</td>
+          </tr>
+          <tr>
+            <th>Battle Passes Bought</th>
+            <td>20</td>
+          </tr>
+          <tr>
+            <th>Started Playing</th>
+            <td>October 18 2022, 04:32 PM</td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="Ranked" class="tabcontent">
+        <table>
+          <tr>
+            <th colspan="2">Current Season</th>
+          </tr>
+          <tr>
+            <th>Current Level</th>
+            <td>43 (3 cubes)</td>
+          </tr>
+          <tr>
+            <th>Highest Level</th>
+            <td>43 (3 cubes)</td>
+          </tr>
+          <tr>
+            <th>Current Win Streak</th>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Games Played</th>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th colspan="2">Lifetime Stats</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              4324 Wins<br />4192 Losses<br />
+              39 Ties<br />
+              (50.54% Win Rate)<br />2683 Snaps<br />
+              2062 Conceded<br />1150 Opponent
+              Conceded
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="Conquest" class="tabcontent">
+        <table>
+          <tr>
+            <th>Mode</th>
+            <th>Games Played</th>
+            <th>Current Winning Streak</th>
+          </tr>
+          <tr>
+            <td>Proving Grounds</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Silver</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Gold</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Infinity</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="Card_Stats" class="tabcontent">
+        <table>
+          <tr>
+            <th colspan="2">Card Win/Loss Ratio (when card is drawn/created in hand or played. Ranked data only.)</th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">
+              Dr Doom: +109<br />
+              Shang Chi: +103<br />
+              Sentinel: +97
+            </td>
+            <td style="vertical-align: top;">
+              Invisible Woman: -66<br />
+              Magik: -63<br />
+              Storm: -58
+            </td>
+          </tr>
+          <!-- Placeholder for remaining rows -->
+          <tr>
+            <td colspan="2">
+              <!-- Additional columns can be added here -->
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="Collection" class="tabcontent">
+        <table>
+          <tr>
+            <th>Collection Level</th>
+            <td>13081</td>
+          </tr>
+          <tr>
+            <th>Cards</th>
+            <td>257</td>
+          </tr>
+          <tr>
+            <th>Splits</th>
+            <td>535</td>
+          </tr>
+          <tr>
+            <th>Variants</th>
+            <td>353</td>
+          </tr>
+          <tr>
+            <th>Card Backs</th>
+            <td>45</td>
+          </tr>
+          <tr>
+            <th>Avatars</th>
+            <td>228</td>
+          </tr>
+          <tr>
+            <th>Titles</th>
+            <td>153</td>
+          </tr>
+          <tr>
+            <th colspan="2">Card/Variant Unlock History</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="variants-container">
+                <div class="variant-column">
+                  1: Jessica Jones<br />
+                  2: Ka Zar<br />
+                  4: Mr Fantastic
+                </div>
+                <div class="variant-column">
+                  6: Spectrum<br />
+                  8: Nightcrawler<br />
+                  10: Wolfsbane
+                </div>
+                <div class="variant-column">
+                  12: White Tiger<br />
+                  14: Odin<br />
+                  18: Groot
+                </div>
+              </div>
+            </td>
+          </tr>
+          <!-- Placeholder for remaining rows -->
+          <tr>
+            <td colspan="2">
+              <!-- Additional columns can be added here -->
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script>
+        document.getElementById("defaultOpen").click();
+      </script>
+    </div>
+    <div style="padding-bottom: 2%;"></div>
+    <footer class="footer">
+      <h1 style="font-size: larger;">Data is collected only by reading the unencrypted files stored in your hard drive.<br />
+I made this data compiler because I love the game and also love statistics and data interpretation.<br/>
+To report any feedback or contact me please use the Reddit thread where I published this.<br/>
+I occasionally stream on twitch <a href="http://twitch.com/obake25">here</a>.<br/><br/>
+I am currently unemployed and if you would be so kind, I would much appreciate any donation to help support me.<br /></h1>
+      <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <input type="hidden" name="business" value="ZU8D84PDDDJCG" />
+        <input type="hidden" name="no_recurring" value="1" />
+        <input type="hidden" name="currency_code" value="EUR" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" width="15%" height="15%"/>
+        <img alt="" border="0" src="https://www.paypal.com/en_PT/i/scr/pixel.gif" width="1" height="1" />
+        </form>
+    </footer>
+  </body>
+</html>
