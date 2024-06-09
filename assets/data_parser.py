@@ -114,7 +114,7 @@ def reload_file():
 		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardDetails' not in data['ServerState']['LeaderboardLog']:
 			standing = 'N.A.'
 		else:
-			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardStanding'])
+			standing = "#" + str(data['ServerState']['LeaderboardLog']['InfiniteLeaderboardDetails']['SkillRating'])
 
 		global skillRating
 		if 'LeaderboardLog' not in data['ServerState'] or 'InfiniteLeaderboardSkillRating' not in data['ServerState']['LeaderboardLog']:
@@ -234,7 +234,7 @@ def reload_file():
 		cardBacksOwned = len(data['ServerState']['CardBacks'])
 
 		global cardUnlockHistory
-		cardUnlockHistory = data['ServerState']['CollectionScoreRewardDefIdsClaimed']['ClaimedCards']
+		cardUnlockHistory = data['ServerState']['CollectionScoreRewardsClaimedHistory']['ClaimedCards']
 
 def get_snapId():
 	return snapId
