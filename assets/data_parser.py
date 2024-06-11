@@ -495,44 +495,80 @@ def get_Variants():
 
 
 def get_CardUnlockHistory():
-    # Extract the claimed cards dictionary
+	# Extract the claimed cards dictionary
 	claimed_cards = cardUnlockHistory
-    
-    # Process the claimed cards into a list of formatted strings
+	def cardUnlockFilter(c):
+		d = c
+		return c != '$type'
+
+	filteredHistory = filter(cardUnlockFilter, claimed_cards)
+	# sortedCardUnlockHistory = sorted(filteredHistory, key=lambda item: int(item), reverse=False)
+	
+	# Process the claimed cards into a list of formatted strings
 	card_list = []
 
-    # sorted_cards = sorted(claimed_cards, key=lambda item: int(item[0]))
+	# sorted_cards = sorted(claimed_cards, key=lambda item: int(item[0]))
 
-	for card_info in claimed_cards:
-        # calculatedLvl = int(level)
-		if card_info == '$type':
+	for cardUnlockRank in filteredHistory:
+		# calculatedLvl = int(level)
+		if cardUnlockRank == '$type':
 			continue
-		cardName = ''.join(' ' + char if char.isupper() else char for char in claimed_cards[card_info]['CardDefId']).strip()
-		rarity = claimed_cards[card_info]['RarityDefId']
-		favorite = 'Yes' if 'Favorite' in claimed_cards[card_info] and claimed_cards[card_info]['Favorite'] == True else 'No'
+		currentCard = claimed_cards[cardUnlockRank]
 
-		if 'ArtVariantDefId' in claimed_cards[card_info].keys():
+		cardName = ''.join(' ' + char if char.isupper() else char for char in currentCard['CardDefId']).strip()
+		rarity = currentCard['RarityDefId']
+		favorite = 'Yes' if 'Favorite' in currentCard and currentCard['Favorite'] == True else 'No'
+
+		if 'ArtVariantDefId' in currentCard.values():
 			cardName += " Variant"
-		card_list.append(f" {cardName}")
-	return generate_card_unlock_history(sorted(card_list))
+		# I want to create a json object with the rank of the card as the first property, and the card information as the second property
+		card = '{"Rank": ' + cardUnlockRank + ', "Card": {"Name": "' + cardName + '", "Rarity": "' + rarity + '", "Favorite": "' + favorite + '"}}'
+		card_list.append(json.loads(card))
+		# card_list.append(f" {cardUnlockRank} - {cardName}")
+	return generate_card_unlock_history(sorted(card_list, key=lambda item: int(item['Rank']), reverse=False))
 
 def generate_card_unlock_history(cards):
-    # Number of columns
-    num_columns = 3
-    # Split cards into columns
-    columns = [[] for _ in range(num_columns)]
-    for i, card in enumerate(cards):
-        columns[i % num_columns].append(card)
+	# Number of columns
+	num_columns = 3
+	# Split cards into columns
+	columns = [[] for _ in range(num_columns)]
+    
+	for i, card in enumerate(cards):
+		# Extract the card name and check if it is a favorite
+		card_name = card['Card'].get('Name', 'Unknown Card')
+		favorite = card['Card'].get('Favorite', False)
+        
+        # Add HTML formatting for favorite cards
+		if favorite == 'Yes':
+			card_name = f'<div style="background-color: orange; padding: 5px; margin-bottom: 5px;">{card_name}</div>'
+		else:
+			card_name = f'<div style="padding: 5px; margin-bottom: 5px;">{card_name}</div>'
+        
+		if 'ArtVariantDefId' in card['Card']:
+			cardName = cardName + " Variant"
+		columns[i % num_columns].append(card_name)
 
     # Create HTML for columns
-    html_columns = '<table style="width: 100%;"><tr>'
-    for col in columns:
-        html_columns += '<td class="variant-column" style="vertical-align: top;">'
-        html_columns += "<br>".join(col)
-        html_columns += '</td>'
-    html_columns += '</tr></table>'
+	html_columns = '<table style="width: 100%; border-collapse: collapse;"><tr>'
+	for col in columns:
+		html_columns += '<td class="variant-column" style="vertical-align: top; padding: 10px;">'
+		html_columns += "".join(col)  # Join with empty string as col now contains HTML divs
+		html_columns += '</td>'
+	html_columns += '</tr></table>'
 
-    return html_columns
+	return html_columns
+ # for i, card in enumerate(cards):
+	# 	columns[i % num_columns].append(card['Card'])
+
+	# # Create HTML for columns
+	# html_columns = '<table style="width: 100%;"><tr>'
+	# for col in columns:
+	# 	html_columns += '<td class="variant-column" style="vertical-align: top;">'
+	# 	html_columns += "<br>".join(col)
+	# 	html_columns += '</td>'
+	# html_columns += '</tr></table>'
+
+	# return html_columns
 
 
 # def get_CardUnlockHistory():
