@@ -57,7 +57,9 @@ if data_parser.isSystemMobile():
 
 fileNameToCreate = "stats_" + datetime.now().strftime("%d-%B-%Y-%H%M%S") + ".html"
 
-with open("assets/template.html", encoding="utf-8-sig") as template_file:
+# LINE BELOW IS ORIGINAL, i WAS HAVING UNKNOWN ISSUES FOR SOME REASON??
+#with open("assets/template.html", encoding="utf-8-sig") as template_file:
+with open("Snap_Player_Stats\\assets\\template.html", encoding="utf-8-sig") as template_file:
     with open(fileNameToCreate, "w", encoding="utf-8") as generated_file:
         addPlayerData(template_file)
         
