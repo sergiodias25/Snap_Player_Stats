@@ -1,21 +1,7 @@
 import json
 import os
 import datetime
-import platform
-from os import environ
-
-is_android = 'ANDROID_STORAGE' in environ
-
-def isSystemWindows():
-    return platform.system() == 'Windows'
-
-def isSystemLinux():
-    return platform.system() == 'Linux'
-
-def isSystemMobile():
-    if platform.system() == 'Linux' and is_android:
-        return True
-    return False
+import assets.file_config as file_config
 
 snapId = ''
 playerName = ''
@@ -58,28 +44,9 @@ cardBacksOwned = 0
 collectionLvl = 0
 cardUnlockHistory = {}
 
-profileFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
-if isSystemLinux():
-	profileFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/ProfileState.json'
-if isSystemMobile():
-	profileFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ProfileState.json'
-profilePath = os.path.expanduser(profileFilePath)
-
-shopFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
-if isSystemLinux():
-	shopFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/ShopState.json'
-if isSystemMobile():
-	shopFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/ShopState.json'
-shopPath = os.path.expanduser(shopFilePath)
-
-collectionFilePath = '~/AppData/Locallow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
-if isSystemLinux():
-	collectionFilePath = '~/.steam/steam/steamapps/compatdata/1997040/pfx/drive_c/users/steamuser/AppData/LocalLow/Second Dinner/SNAP/Standalone/States/nvprod/CollectionState.json'
-if isSystemMobile():
-	collectionFilePath = '/sdcard/Android/data/com.nvsgames.snap/files/Standalone/States/nvprod/CollectionState.json'
-collectionPath = os.path.expanduser(collectionFilePath)
-
 def reload_file():
+	shopPath = file_config.getShopPath()
+	print(f"shopPath: {shopPath}")
 	with open(shopPath, encoding="utf-8-sig") as shop_json_file:
 		data = json.load(shop_json_file)
 
@@ -89,6 +56,8 @@ def reload_file():
 		else:
 			battlePassesBought = data['ServerState']['Account']['ProductPurchaseCount']['BattlePassPremiumBasic']
 
+	profilePath = file_config.getProfilePath()
+	print(f"profilePath: {profilePath}")
 	with open(profilePath, encoding="utf-8-sig") as profile_json_file:
 		data = json.load(profile_json_file)
 
@@ -206,6 +175,8 @@ def reload_file():
 		global totalCollectorsTokensSpent
 		totalCollectorsTokensSpent = data['ServerState']['Wallet']['_collectorsTokensCurrency']['SpentAmount']
 
+	collectionPath = file_config.getCollectionPath()
+	print(f"collectionPath: {collectionPath}")
 	with open(collectionPath, encoding="utf-8-sig") as collection_json_file:
 		data = json.load(collection_json_file)
 
@@ -282,7 +253,7 @@ def get_rankedCurrentWinStreak():
 	return winstreakAddPlusSign(rankedCurrentWinStreak)
 
 def get_timeUpdated():
-	timestamp = os.path.getmtime(os.path.expanduser(profileFilePath))
+	timestamp = os.path.getmtime(os.path.expanduser(file_config.getProfilePath()))
 	return datetime.datetime.fromtimestamp(timestamp).strftime('%B %d %I:%M %p')
 
 def get_timeStarted():

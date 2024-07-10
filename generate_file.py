@@ -1,9 +1,15 @@
+import os
 import webbrowser
 import assets.data_parser as data_parser
+import assets.file_config as file_config
 from datetime import datetime 
 
 content = ""
 screenWidthPrct = ''
+
+if file_config.isHelp():
+    print(file_config.USAGE)
+    exit()
 
 def addPlayerData(template_file):
     global content
@@ -50,9 +56,9 @@ def addPlayerData(template_file):
     content = content.replace("{{ cardUnlockHistory }}", str(data_parser.get_CardUnlockHistory()))
     content = content.replace("{{ screenWidthPrct }}", screenWidthPrct)
 
-if data_parser.isSystemWindows() or data_parser.isSystemLinux():
+if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
     screenWidthPrct = '70%'
-if data_parser.isSystemMobile():
+elif file_config.isSystemMobile():
     screenWidthPrct = '95%'
 
 fileNameToCreate = "stats_" + datetime.now().strftime("%d-%B-%Y-%H%M%S") + ".html"
@@ -63,7 +69,7 @@ with open("assets/template.html", encoding="utf-8-sig") as template_file:
         
         generated_file.write(content)
         
-        if data_parser.isSystemWindows() or data_parser.isSystemLinux():
-            webbrowser.open_new_tab(fileNameToCreate)
-        if data_parser.isSystemMobile():
-            print("File stats.html generated in the project folder. Open it manually in your browser!")
+        if file_config.isSystemWindows() or file_config.isSystemLinux() or file_config.isSystemMac():
+            webbrowser.open_new_tab(f"file://{os.path.abspath(fileNameToCreate)}")
+        if file_config.isSystemMobile():
+            print(f"File stats_date.html generated in the project folder. Open it manually in your browser!")
